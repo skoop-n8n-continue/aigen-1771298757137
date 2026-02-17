@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Office Directory</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link rel="stylesheet" href="styles.css?v=1771298954">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <div class="logo-area">
+                <h1>BUILDING DIRECTORY</h1>
+                <p class="subtitle">Welcome to The Plaza</p>
+            </div>
+            <div class="time-widget">
+                <div id="clock" class="clock">00:00</div>
+                <div id="date" class="date">Loading...</div>
+            </div>
+        </header>
+
+        <main class="directory-container">
+            <div class="directory-header">
+                <div class="col col-name">Company Name</div>
+                <div class="col col-floor">Floor</div>
+                <div class="col col-suite">Suite</div>
+            </div>
+            <div class="directory-list-wrapper" id="directory-wrapper">
+                <div class="directory-list" id="directory-list">
+                    <!-- Javascript will populate this -->
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="ticker-wrap">
+                <div class="ticker">
+                    <div class="ticker__item">Please check in at the front desk for assistance.</div>
+                    <div class="ticker__item"> • </div>
+                    <div class="ticker__item">Restrooms are located on the ground floor near the elevators.</div>
+                    <div class="ticker__item"> • </div>
+                    <div class="ticker__item">Café open 7AM - 3PM.</div>
+                    <div class="ticker__item"> • </div>
+                    <div class="ticker__item">Emergency Exit stairs located at ends of hallway.</div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js?v=1771298954"></script>
+</body>
+</html>

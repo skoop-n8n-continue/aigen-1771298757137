@@ -1,0 +1,199 @@
+:root {
+    --bg-color: #10181f;
+    --text-color: #ffffff;
+    --accent-color: #00b7af;
+    --secondary-color: #6a7071;
+    --header-bg: #1a2632;
+    --row-alt-bg: #16202a;
+    --font-main: 'Inter', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-main);
+    height: 100vh;
+    overflow: hidden; /* Prevent body scroll, handled internally */
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* Header */
+.header {
+    background-color: var(--header-bg);
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 4px solid var(--accent-color);
+    flex-shrink: 0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    z-index: 10;
+}
+
+.logo-area h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+    font-weight: 400;
+}
+
+.time-widget {
+    text-align: right;
+}
+
+.clock {
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--accent-color);
+    font-variant-numeric: tabular-nums; /* Monospaced numbers for clock */
+}
+
+.date {
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+    color: var(--secondary-color);
+}
+
+/* Directory Content */
+.directory-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 4rem;
+    overflow: hidden; /* Hide overflow */
+    position: relative;
+}
+
+.directory-header {
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr;
+    padding: 1rem 2rem;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    border-bottom: 2px solid var(--secondary-color);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.directory-list-wrapper {
+    flex: 1;
+    overflow: hidden; /* Hide scrollbars */
+    position: relative;
+    /* Masking for smooth fade at bottom/top */
+    -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+}
+
+.directory-list {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    will-change: transform; /* Hint for compositor */
+}
+
+.directory-item {
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr;
+    padding: 1.2rem 2rem;
+    font-size: 2rem;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.directory-item:nth-child(even) {
+    background-color: var(--row-alt-bg);
+}
+
+.col-name {
+    font-weight: 600;
+}
+
+.col-floor, .col-suite {
+    color: var(--secondary-color);
+}
+
+/* Footer Ticker */
+.footer {
+    background-color: var(--header-bg);
+    height: 70px;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    border-top: 2px solid var(--accent-color);
+    position: relative;
+    z-index: 10;
+}
+
+.ticker-wrap {
+    width: 100%;
+    overflow: hidden;
+    padding-left: 100%; /* Start offscreen right */
+    box-sizing: content-box;
+}
+
+.ticker {
+    display: inline-block;
+    height: 4rem;
+    line-height: 4rem;
+    white-space: nowrap;
+    padding-right: 2rem;
+    box-sizing: content-box;
+    animation: ticker 45s linear infinite; /* Adjusted speed */
+}
+
+.ticker__item {
+    display: inline-block;
+    padding: 0 2rem;
+    font-size: 1.5rem;
+    color: var(--text-color);
+}
+
+@keyframes ticker {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(calc(-100% - 100vw), 0, 0); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .header, .directory-container {
+        padding: 1.5rem 2rem;
+    }
+    .logo-area h1 { font-size: 2rem; }
+    .clock { font-size: 2.5rem; }
+    .directory-item, .directory-header { font-size: 1.5rem; }
+}
+
+@media (max-width: 768px) {
+    .header { flex-direction: column; text-align: center; gap: 1rem; }
+    .time-widget { text-align: center; }
+    .directory-header, .directory-item { 
+        grid-template-columns: 2fr 0.8fr 0.8fr; 
+        font-size: 1.2rem;
+        padding: 1rem;
+    }
+    .col-floor, .col-suite { text-align: right; }
+}
