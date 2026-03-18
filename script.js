@@ -35,8 +35,8 @@ const directoryData = [
     { name: "Nakatomi Trading", floor: "30", suite: "3000" }
 ];
 
-// Sort data alphabetically by name
-directoryData.sort((a, b) => a.name.localeCompare(b.name));
+// Sort data by floor number in ascending order
+directoryData.sort((a, b) => parseInt(a.floor) - parseInt(b.floor));
 
 function init() {
     renderDirectory();
