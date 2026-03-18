@@ -47,3 +47,7 @@ temp/
 .vscode/
 .idea/
 *.sublime-*
+.claude
+.tmp
+node_modules
+.npm_cache
