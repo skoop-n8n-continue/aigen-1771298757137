@@ -1,10 +1,10 @@
 :root {
-    --bg-color: #ffffff;
-    --text-color: #10181f;
+    --bg-color: #10181f;
+    --text-color: #ffffff;
     --accent-color: #00b7af;
     --secondary-color: #6a7071;
-    --header-bg: #ffffff;
-    --row-alt-bg: #f8f9fa;
+    --header-bg: #1a2632;
+    --row-alt-bg: #16202a;
     --font-main: 'Inter', sans-serif;
 }
 
@@ -38,7 +38,7 @@ body {
     align-items: center;
     border-bottom: 4px solid var(--accent-color);
     flex-shrink: 0;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     z-index: 10;
 }
 
@@ -84,6 +84,37 @@ body {
     position: relative;
 }
 
+.search-container {
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+#search-input {
+    width: 100%;
+    max-width: 800px;
+    padding: 1.2rem 2rem;
+    font-size: 1.6rem;
+    border: 2px solid var(--secondary-color);
+    border-radius: 8px;
+    background-color: var(--row-alt-bg);
+    color: var(--text-color);
+    font-family: var(--font-main);
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+#search-input:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 10px rgba(0, 183, 175, 0.3);
+}
+
+#search-input::placeholder {
+    color: var(--secondary-color);
+}
+
 .directory-header {
     display: grid;
     grid-template-columns: 3fr 1fr 1fr;
@@ -120,7 +151,7 @@ body {
     padding: 1.2rem 2rem;
     font-size: 2rem;
     align-items: center;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .directory-item:nth-child(even) {
