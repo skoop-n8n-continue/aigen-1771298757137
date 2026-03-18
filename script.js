@@ -35,68 +35,33 @@ const directoryData = [
     { name: "Nakatomi Trading", floor: "30", suite: "3000" }
 ];
 
-// Sort data alphabetically by name
-directoryData.sort((a, b) => a.name.localeCompare(b.name));
-
-let filteredData = [...directoryData];
-
-// Scroll state
-let scrollTop = 0;
-let direction = 1; // 1 = down, -1 = up
-let isPaused = false;
-let pauseTimer = null;
+// Sort data by floor number in ascending order
+directoryData.sort((a, b) => parseInt(a.floor) - parseInt(b.floor));
 
 function init() {
-    const searchInput = document.getElementById('search-input');
-    if (searchInput) {
-        searchInput.addEventListener('input', handleSearch);
-    }
-
     renderDirectory();
     startClock();
     // Allow a moment for rendering before calculating scroll
     setTimeout(initScroll, 100);
 }
 
-function handleSearch(e) {
-    const query = e.target.value.toLowerCase();
-
-    // Filter the data based on the query
-    filteredData = directoryData.filter(item =>
-        item.name.toLowerCase().includes(query) ||
-        item.floor.toLowerCase().includes(query) ||
-        item.suite.toLowerCase().includes(query)
-    );
-
-    renderDirectory();
-    resetScroll();
-}
-
 function renderDirectory() {
     const listContainer = document.getElementById('directory-list');
-
+    
     // Clear existing
     listContainer.innerHTML = '';
-
-    if (filteredData.length === 0) {
-        const row = document.createElement('div');
-        row.className = 'directory-item no-results';
-        row.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; color: var(--secondary-color);">No companies found</div>`;
-        listContainer.appendChild(row);
-        return;
-    }
-
+    
     // Generate HTML
-    filteredData.forEach(item => {
+    directoryData.forEach(item => {
         const row = document.createElement('div');
         row.className = 'directory-item';
-
+        
         row.innerHTML = `
             <div class="col col-name">${item.name}</div>
             <div class="col col-floor">${item.floor}</div>
             <div class="col col-suite">${item.suite}</div>
         `;
-
+        
         listContainer.appendChild(row);
     });
 }
@@ -104,50 +69,40 @@ function renderDirectory() {
 function startClock() {
     const clockEl = document.getElementById('clock');
     const dateEl = document.getElementById('date');
-
+    
     function update() {
         const now = new Date();
-
+        
         // Time 12h format
         let hours = now.getHours();
         const ampm = hours >= 12 ? 'PM' : 'AM';
         hours = hours % 12;
-        hours = hours ? hours : 12;
+        hours = hours ? hours : 12; 
         const minutes = now.getMinutes().toString().padStart(2, '0');
-
+        
         clockEl.textContent = `${hours}:${minutes} ${ampm}`;
-
+        
         // Date
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         dateEl.textContent = now.toLocaleDateString('en-US', options);
     }
-
+    
     update();
-    setInterval(update, 1000);
-}
-
-function resetScroll() {
-    scrollTop = 0;
-    direction = 1;
-    isPaused = true;
-    clearTimeout(pauseTimer);
-
-    const list = document.getElementById('directory-list');
-    if (list) {
-        list.style.transform = `translateY(0)`;
-    }
-
-    // Briefly pause after a search reset
-    pauseTimer = setTimeout(() => { isPaused = false; }, 1000);
+    setInterval(update, 1000); 
 }
 
 function initScroll() {
     const wrapper = document.getElementById('directory-wrapper');
     const list = document.getElementById('directory-list');
-
+    
+    let scrollTop = 0;
+    let direction = 1; // 1 = down, -1 = up
+    let isPaused = false;
+    let pauseTimer = null;
+    
     function scrollLoop() {
         const maxScroll = list.scrollHeight - wrapper.clientHeight;
-
+        
         // If content fits, don't scroll
         if (maxScroll <= 0) {
             list.style.transform = `translateY(0)`;
@@ -162,7 +117,7 @@ function initScroll() {
 
         // Move
         scrollTop += (SCROLL_SPEED * direction);
-
+        
         // Check bounds
         if (scrollTop >= maxScroll) {
             scrollTop = maxScroll;
@@ -177,12 +132,12 @@ function initScroll() {
             clearTimeout(pauseTimer);
             pauseTimer = setTimeout(() => { isPaused = false; }, SCROLL_DELAY);
         }
-
+        
         list.style.transform = `translateY(-${scrollTop}px)`;
-
+        
         requestAnimationFrame(scrollLoop);
     }
-
+    
     // Start loop
     scrollLoop();
 }
