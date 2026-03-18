@@ -84,6 +84,37 @@ body {
     position: relative;
 }
 
+.search-container {
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+#search-input {
+    width: 100%;
+    max-width: 800px;
+    padding: 1.2rem 2rem;
+    font-size: 1.6rem;
+    border: 2px solid var(--secondary-color);
+    border-radius: 8px;
+    background-color: var(--row-alt-bg);
+    color: var(--text-color);
+    font-family: var(--font-main);
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+#search-input:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 10px rgba(0, 183, 175, 0.3);
+}
+
+#search-input::placeholder {
+    color: var(--secondary-color);
+}
+
 .directory-header {
     display: grid;
     grid-template-columns: 3fr 1fr 1fr;
