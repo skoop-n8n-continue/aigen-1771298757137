@@ -33,3 +33,7 @@ Thumbs.db
 *.tmp
 *.temp
 .cache/
+.claude
+.tmp
+node_modules
+.npm_cache
